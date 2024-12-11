@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/css/user_management.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="/static/image/whitelogo.png" alt="Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/overview">Overview</a></li>
+                    <li><a href="/loan_management" class="active">Loan Approval</a></li> 
+                    <li><a href="/manage_loan">Loan Management</a></li> 
+                    <li><a href="/user_management">User Management</a></li>
+                </ul>
+            </nav>
+            <div class="logout">
+                <form action="{{ url_for('logout') }}" method="POST">
+                    <button type="submit">Log Out</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search..." class="search-input">
+                </div>
+            </header>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email Address</th>
+                        <th>Phone Number</th>
+                        <th>Active Loans</th>
+                        <th>Repayment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+        <tr>
+            <td>{{ user.full_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone_number }}</td>
+            <td>
+                {% if user.active_loans %}
+                    <ul>
+                        {% for loan in user.active_loans %}
+                            <li>₱{{ loan.loan_amount }} ({{ loan.status }})</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    No Active Loan
+                {% endif %}
+            </td>
+            <td>
+                {% if user.active_loans %}
+                    {% for loan in user.active_loans %}
+                        <p>₱{{ loan.repayment_amount }}</p>
+                    {% endfor %}
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

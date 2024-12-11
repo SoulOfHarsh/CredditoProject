@@ -1,0 +1,670 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.background {
+    background-image: url('../image/bg.jpeg'); /* replace with your image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes the content to top and bottom */
+    padding: 20px;
+    color: white;
+}
+.nav-bar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: #1b1a3d;
+    padding: 12px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 80px;
+    margin-right: auto;
+    margin-left: 50px;
+  }
+  
+  .nav-bar a {
+    margin: 0 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  .nav-bar a:hover {
+    text-decoration: underline;
+  }
+/* Header styling */
+.header {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: auto; /* Align header towards the top */
+    color: white;
+}
+
+.highlight {
+    color: #ea5f8c;
+}
+
+/* Position loan info at the bottom left */
+.loan-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 5px; /* Space from the bottom */
+}
+
+.amount-label { /*amount of loan avail*/
+    font-size: 35px;        
+    margin-bottom: 380px;      
+    color: white;
+}
+
+.loan-amount { /*php*/
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+.amount { /*100*/
+    color: #ea5f8c; /* Highlight color for the amount */
+    font-size: inherit; /* Matches the font size of loan-amount */
+}
+
+/* Apply button styling */
+.apply-btn {
+    align-self: flex-end; /* Aligns the button to the right */
+    margin-top: 20px; /* Space above the button */
+    margin-left: 10px; 
+    padding: 10px 20px;
+    background-color: #FFFFFF;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.apply-btn:hover {
+    background-color: #7f7fed; /* Button hover effect */
+}
+
+/* Navigation Bar styling */
+.nav-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #1b1a3d;
+    padding: 12px;
+    display: flex;
+    justify-content: flex-end; /* Aligns navigation links to the right */
+    align-items: center;
+    z-index: 1000; /* Ensures the navbar is above other elements */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    height: 80px; 
+    margin-right: auto; /* Pushes the links to the right */
+    margin-left: 50px;       
+}
+
+.nav-bar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: #1b1a3d;
+    padding: 12px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.logo {
+    height: 80px;
+    margin-right: auto;
+    margin-left: 50px;
+}
+
+.nav-bar a {
+    margin: 0 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav-bar a:hover {
+    text-decoration: underline;
+}
+/* Align text to the left */
+.align-left {
+    text-align: left;
+}
+.application-process {
+    text-align: center;
+    background-color: #FFFFFF;
+    padding: 40px 20px;
+    color: #1b1a3d;
+}
+
+.application-process h2 {
+    font-size: 36px;
+    margin-bottom: 60px;
+}
+
+.process-steps {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    margin-bottom: -30px;
+    
+}
+
+.step {
+    text-align: center;
+    max-width: 200px;
+}
+
+.step-number {
+    font-size: 24px;
+    color: #ea5f8c;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.step-description {
+    font-size: 20px;
+    color: #1b1a3d;
+    margin-bottom: 10px;
+}
+.why-choose-creddito {
+    text-align: center;
+    background-color: #1b1a3d; /* Dark background */
+    padding: 40px 20px;
+    color: white;
+    margin-top: 20px; /* Space above the section */
+}
+
+.why-choose-creddito h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.why-choose-creddito p {
+    font-size: 18px;
+    color: #FFFFFF;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.spaced-paragraph {
+    margin-bottom: 50px; /* Extra space for this specific paragraph */
+}
+
+.highlight {
+    color: #ea5f8c; /* Pink highlight color */
+}
+.highlight2 {
+    color: #ffff;
+}
+/* Features Section */
+.feature-section {
+    text-align: center;
+    padding: 40px 20px;
+    color: black;
+}
+.feature-section-title {
+    font-size: 40px;
+    color: #1b1a3d;
+    margin-bottom: 10px;
+}
+.feature-subtitle {
+    font-size: 24px; 
+    font-weight: bold; 
+    color: #1b1a3d; 
+    margin-top: 10px; 
+    text-align: center; 
+}
+.feature-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px; /* Space between items */
+    padding: 20px; /* Space around the entire grid */
+}
+
+.feature-item {
+    background-color: #f5f5f5;
+    color: #333;
+    width: 300px; /* Increase the width to make each item bigger */
+    padding: 30px; /* Increase padding for more spacious content */
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s; /* Add hover effect */
+}
+
+.feature-item h3 {
+    font-size: 20px; /* Slightly larger title font */
+    color: #1b1a3d;
+    margin-bottom: 15px;
+}
+
+.feature-item p {
+    font-size: 16px; /* Slightly larger text */
+    color: #555;
+    line-height: 1.5; /* Better readability */
+}
+
+.feature-item img {
+    width: 60px; /* Make icons bigger */
+    margin-bottom: 15px;
+}
+
+.feature-item:hover {
+    transform: scale(1.05); /* Scale up slightly on hover */
+}
+/*footer*/
+.footer {
+    background-color: #1b1a3d; /* Dark background color */
+    color: white; /* Text color */
+    padding: 20px 0; /* Padding for spacing */
+    text-align: center; /* Center-align text */
+    width: 100%;
+
+}
+
+.footer-content {
+    max-width: 1200px; /* Limit width for large screens */
+    margin: 0 auto; /* Center the content */
+    padding: 0 20px;
+    margin-top: 10px;
+}
+
+.footer p {
+    font-size: 16px; /* Base text size */
+    margin: 5px 0;
+    margin-bottom: 5px;
+}
+
+.footer p:first-child {
+    font-size: 25px; /* Larger font for the main slogan */
+    font-weight: bold; /* Bold for emphasis */
+    margin-bottom: 20px;
+    letter-spacing: 2.2px;
+}
+
+.highlight {
+    color: #ea5f8c; /* Highlight color for LOANS and SOLUTIONS */
+    font-weight: bold;
+}
+.menu-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-right: 50px;
+    padding: 5px;
+}
+
+.menu-toggle:hover {
+    color: #ea5f8c;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: #1b1a3d;
+    color: white;
+    transition: right 0.3s ease-in-out;
+    z-index: 1001;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #ea5f8c;
+}
+
+.close-sidebar {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.close-sidebar:hover {
+    color: #ea5f8c;
+}
+
+.sidebar-content {
+    padding: 20px;
+}
+
+.menu-section {
+    margin-bottom: 30px;
+}
+
+.menu-section h4 {
+    color: #ea5f8c;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.menu-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-section ul li {
+    padding: 10px 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.menu-section ul li:hover {
+    color: #ea5f8c;
+}
+
+.menu-section ul li i {
+    margin-right: 10px;
+    width: 20px;
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1000;
+}
+
+.overlay.active {
+    display: block;
+}
+
+/* From Uiverse.io by Jimdrer */ 
+#checkbox {
+    display: none;
+  }
+  
+  .toggle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition-duration: 0.3s;
+  }
+  
+  .bars {
+    width: 100%;
+    height: 4px;
+    background-color: rgb(253, 255, 243);
+    border-radius: 5px;
+    transition-duration: 0.3s;
+  }
+  
+ /* Reset styles */
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.background {
+    background-image: url('image/bg.jpeg'); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    color: white;
+}
+
+/* Navbar */
+.nav-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #1b1a3d;
+    padding: 12px;
+    display: flex;
+    justify-content: flex-end; /* Align elements to the right */
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    height: 80px;
+    margin-right: auto; /* Pushes the links to the right */
+    margin-left: 50px;
+}
+
+.nav-bar a {
+    margin: 0 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav-bar a:hover {
+    text-decoration: underline;
+}
+
+/* Button for toggle sidebar */
+.toggle-btn {
+    background-color: #1b1a3d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.toggle-btn:hover {
+    background-color: #1b1a3d;
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Initially hide the sidebar */
+    width: 300px; /* Adjusted width to match design */
+    height: 100%;
+    background-color: #1b1a3d;
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    transition: right 0.3s ease;
+    font-family: 'Arial', sans-serif; /* Font update for cleaner style */
+}
+
+/* Active sidebar */
+.sidebar.active {
+    right: 0; /* Show sidebar when active */
+}
+
+/* Profile section */
+.sidebar .profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.sidebar .profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.sidebar .profile .phone-number {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Menu buttons */
+.sidebar .menu {
+    margin-top: 35px;
+}
+
+.sidebar .menu button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align text and icons to the left */
+    gap: 10px; /* Add spacing between icon and text */
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    color: #1b1a3d;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+   font-weight: bold;
+}
+
+.sidebar .menu button i {
+    margin-right: 10px;
+}
+.sidebar .menu button:hover {
+    background-color: #7f7fed;
+}
+/* Logout button */
+.sidebar .logout {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+}
+
+.sidebar .logout:hover {
+    color: #ea5f8c;
+}
+
+.sidebar .logout i {
+    margin-right: 10px;
+}
+
+/* Close Sidebar Button */
+.close-sidebar {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.close-sidebar:hover {
+    color: #ea5f8c;
+}
+.menu button .menu-icon,
+.logout .menu-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain; /* Ensure icons maintain proportions */
+}
+.logout {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.logout:hover {
+    color: #ea5f8c;
+}
+/* Menu link styling */
+.menu-link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px; /* Spacing between the icon and text */
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    background-color: white;
+    border-radius: 10px;
+    color: #1b1a3d;
+    font-size: 16px;
+    font-weight: bold; /* Bold text */
+    text-decoration: none; /* Remove underline from links */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for menu links */
+.menu-link:hover {
+    background-color: #7f7fed;
+}
+
+/* Icon styling */
+.menu-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}

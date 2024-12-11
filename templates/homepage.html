@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CREDDITO: Homepage</title>
+    <link rel="stylesheet" href="/static/css/homepage.css">
+    <style>
+        .background {
+            background-image: url("{{ url_for('static', filename='image/bg.jpeg') }}");
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-bar">
+            <img src="../static/image/whitelogo.png" alt="Logo" class="logo">
+
+            {% if not is_logged_in %}
+                <a href="/apply" class="nav-link">APPLY</a>
+                <a href="/login" class="nav-link">LOGIN</a>
+                <a href="/about" class="nav-link">ABOUT US</a>
+            {% else %}
+                <a href="/order" class="nav-link">ORDER</a>
+                <a href="/about" class="nav-link">ABOUT US</a>
+                <button class="toggle-btn" id="toggle-btn">☰ </button>
+            {% endif %}
+        </div>
+    </header>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <button class="close-sidebar" id="close-btn">✖</button>
+    <div class="profile">
+        <img src="../static/image/account.png" alt="Profile Avatar">
+        <span class="phone-number" id="phone-number">{{ full_name }}</span>
+    </div>
+    <div class="menu">
+        <!-- Personal Information -->
+        <a href="/personal_info" class="menu-link">
+            <img src="../static/image/personal_info.png" alt="Personal Info Icon" class="menu-icon">
+            Personal Information
+        </a>
+
+        <!-- Loan History -->
+        <a href="/loan_history" class="menu-link">
+            <img src="../static/image/history.png" alt="Loan History Icon" class="menu-icon">
+            Loan History
+        </a>
+
+        <!-- Privacy Policy -->
+        <a href="/privacy_policy" class="menu-link">
+            <img src="../static/image/policy.png" alt="Privacy Policy Icon" class="menu-icon">
+            Privacy Policy
+        </a>
+    </div>
+    {% if is_logged_in %}
+    <div class="logout">
+        <form action="/logout" method="POST" style="display: inline;">
+            <button type="submit" class="menu-link">
+                <img src="../static/image/logout.png" alt="Logout Icon" class="menu-icon">
+                Log Out
+            </button>
+        </form>
+    </div>
+    {% endif %}
+</div>
+   
+    <script>
+        // Sidebar toggle functionality
+        const toggleBtn = document.getElementById('toggle-btn');
+        const sidebar = document.getElementById('sidebar');
+        const closeBtn = document.getElementById('close-btn');
+
+        // Open/Close Sidebar
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('active'); // Toggle active class
+            toggleBtn.textContent = sidebar.classList.contains('active') ? "✖" : "☰"; // Toggle button text
+        });
+
+        // Close Sidebar
+        closeBtn.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            toggleBtn.textContent = "☰";
+        });
+
+        // Display phone number dynamically
+        const urlParams = new URLSearchParams(window.location.search);
+        const phone = urlParams.get('phone');
+
+        if (phone) {
+            document.getElementById('phone-number').textContent = `Phone Number: ${phone}`;
+        }
+
+    </script>
+
+    <!-- Background Section -->
+    <div class="background">
+        <div class="header">Welcome to <span class="highlight">Creddito</span></div>
+        <div class="loan-info">
+            <p class="amount-label">Amount of Loan Available</p>
+            <p class="loan-amount">₱<span class="amount">100,000</span></p>
+        </div>
+        {% if not is_logged_in %}
+            <a href="/apply" class="apply-btn">Apply Now → </a> <!-- Button -->
+        {% else %}
+        {% endif %}
+    </div>
+    
+    <!-- Application Process Section -->
+    <section class="application-process">
+        <h2>APPLICATION PROCESS</h2>
+        <div class="process-steps">
+            <div class="step">
+                <p class="step-number">01.</p>
+                <p class="step-description">Submit an Application.</p>
+                <p>__________________________</p>
+            </div>
+            <div class="step">
+                <p class="step-number">02.</p>
+                <p class="step-description">Complete Information.</p>
+                <p>__________________________</p>
+            </div>
+            <div class="step">
+                <p class="step-number">03.</p>
+                <p class="step-description">Loan Received.</p>
+                <p>_________________________</p>
+            </div>
+        </div>
+    </section>
+
+        <!-- Why Choose Creddito Section -->
+        <div class="why-choose-creddito">
+            <h2>Why choose <span class="highlight">Creddito</span>?</h2>
+            <p>At Creddito, we understand that life can be unpredictable, and sometimes you need a little extra help to reach your goals.</p>
+            <p class ="spaced-paragraph">We’re more than just a loan application; we’re a community dedicated to empowering you with the financial support you need.</p>
+            <p>---</p>
+            <p>Our capital comes from a network of passionate investors who believe in your potential.</p>
+            <p>We strive to offer flexible loan solutions that fit your unique situation, whether you’re looking to fund a personal project, 
+            <p>grow your business, or manage unexpected expenses.</p>
+        </div>
+        <!-- Features Section -->
+        <div class="feature-section" id="features">
+            <h2 class="feature-section-title"> <span class="highlight">Creddito</span> - Loan Platform </h2>
+            <p class="feature-subtitle">Start a Loan with Creddito!</p>
+            <p><span class="highlight2">.</span></p>
+            <div class="feature-grid">
+                <!-- Feature 1 -->
+                <div class="feature-item">
+                    <img src="../static/image/first.png" alt="First-Time Borrower Discount">
+                    <h3>First-Time Borrower Discount</h3>
+                    <p>New users get a 3% discount on the first month's interest for their first loan application!</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="feature-item">
+                    <img src="../static/image/cashback.png" alt="Cashback on Timely Payments">
+                    <h3>Cashback on Timely Payments</h3>
+                    <p>Receive 2% cashback on your total loan interest when you make all your repayments on time!</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="feature-item">
+                    <img src="../static/image/nohidden.png" alt="No Hidden Fees">
+                    <h3>No Hidden Fees</h3>
+                    <p>What you see is what you get! Creddito ensures complete transparency, with no hidden fees or unexpected charges.</p>
+                </div>
+                <!-- Feature 4 -->
+                <div class="feature-item">
+                    <img src="../static/image/returning.png" alt="Exclusive Offers for Returning Customers">
+                    <h3>Exclusive Offers for Returning Customers</h3>
+                    <p>Loyal customers get special interest rates and exclusive offers on their next loans.</p>
+                </div>
+                <!-- Feature 5 -->
+                <div class="feature-item">
+                    <img src="../static/image/referral.png" alt="Referral Bonuses">
+                    <h3>Referral Bonuses</h3>
+                    <p>Invite friends to join and earn rewards! Both you and your friend get a cashback bonus or lower interest rates on your next loan.</p>
+                </div>
+            </div>
+        </div>
+        
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>SMART <span class="highlight">LOANS</span>, SIMPLE <span class="highlight">SOLUTIONS</span></p>
+            <p>&copy; 2024 Creddito. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

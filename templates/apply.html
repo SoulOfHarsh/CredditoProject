@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CREDDITO: Register</title>
+    <link rel="stylesheet" href="/static/css/apply.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        .background {
+            background-color: #ffffff;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+        .nav-bar {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background-color: #1b1a3d;
+            padding: 12px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .logo {
+            height: 80px; 
+            margin-right: auto; 
+            margin-left: 50px;       
+        }
+        .nav-bar a {
+            margin: 0 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            margin-left: 20px; 
+        }
+        .nav-bar a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+        .form-logo {
+            margin-right: 50px;
+            text-align: center;
+        }
+        .form-logo img {
+            width: 350px;
+            height: 350px;
+        }
+        .register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: #1b1a3d;
+}
+
+.register-form h2 {
+    font-size: 1.5em;
+    color: #1b1a3d;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.register-form .name-fields {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.register-form .input-group {
+    flex: 1;
+}
+
+.register-form label {
+    font-size: 14px;
+    color: #1b1a3d;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.register-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #1b1a3d;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #1b1a3d;
+}
+
+.register-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #1b1a3d;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.register-form button:hover {
+    background-color: #3e3e5e;
+}
+
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <img src="/static/image/whitelogo.png" alt="Logo" class="logo">
+        {% if not is_logged_in %}
+            <a href="/homepage" class="nav-link">HOME</a>
+            <a href="/about" class="nav-link">ABOUT US</a>
+            <a href="/login" class="nav-link">LOGIN</a>
+        {% else %}
+            <button class="toggle-btn" id="toggle-btn">☰ </button>
+        {% endif %}
+    </div>
+
+    !-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <button class="close-sidebar" id="close-btn">✖</button>
+        <div class="profile">
+            <img src="/static/image/account.png" alt="Profile Avatar">
+            <span class="phone-number" id="phone-number">Phone Number</span>
+        </div>
+        <div class="menu">
+            <!-- Personal Information -->
+            <a href="/personal_info" class="menu-link">
+                <img src="/static/image/personal_info.png" alt="Personal Info Icon" class="menu-icon">
+                Personal Information
+            </a>
+    
+            <!-- Loan History -->
+            <a href="/loan_history" class="menu-link">
+                <img src="/static/image/history.png" alt="Loan History Icon" class="menu-icon">
+                Loan History
+            </a>
+    
+            <!-- Privacy Policy -->
+            <a href="/privacy_policy" class="menu-link">
+                <img src="/static/image/policy.png" alt="Privacy Policy Icon" class="menu-icon">
+                Privacy Policy
+            </a>
+        </div>
+        <div class="logout">
+            <form action="/logout" method="POST" style="display: inline;">
+                <button type="submit" class="menu-link">
+                    <img src="../static/image/logout.png" alt="Logout Icon" class="menu-icon">
+                    Log Out
+                </button>
+            </form>
+        </div>
+    </div>
+       
+        <script>
+            // Sidebar toggle functionality
+            const toggleBtn = document.getElementById('toggle-btn');
+            const sidebar = document.getElementById('sidebar');
+            const closeBtn = document.getElementById('close-btn');
+    
+            // Open/Close Sidebar
+            toggleBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('active'); // Toggle active class
+                toggleBtn.textContent = sidebar.classList.contains('active') ? "✖" : "☰"; // Toggle button text
+            });
+    
+            // Close Sidebar
+            closeBtn.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                toggleBtn.textContent = "☰";
+            });
+    
+            // Display phone number dynamically
+            const urlParams = new URLSearchParams(window.location.search);
+            const phone = urlParams.get('phone');
+    
+            if (phone) {
+                document.getElementById('phone-number').textContent = `Phone Number: ${phone}`;
+            }
+    
+        </script>
+        
+    <div class="background">
+        <div class="container">
+            <div class="form-logo">
+                <img src="/static/image/logocre.png" alt="Logo">
+            </div>
+            <form class="register-form" action="/apply" method="POST">
+                <h2>Register to get started</h2>
+                
+                <div class="name-fields">
+                    <div class="input-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="first-name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="last-name" required>
+                    </div>
+                </div>
+                
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+                
+                <button type="submit">Register</button>
+                <p class="login-link">
+                    Already have an account? <a href="/login">Login</a>
+                </p>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>SMART <span class="highlight">LOANS</span>, SIMPLE <span class="highlight">SOLUTIONS</span></p>
+            <p>&copy; 2024 Creddito. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

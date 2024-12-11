@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Information</title>
+  <link rel="stylesheet" href="/static/css/personal_info.css">
+</head>
+<body>
+  <header>
+    <div class="nav-bar">
+      <img src="/static/image/whitelogo.png" alt="Logo" class="logo">
+
+      {% if not is_logged_in %}
+          <a href="/homepage" class="nav-link">HOME</a>
+          <a href="/apply" class="nav-link">APPLY</a>
+          <a href="/login" class="nav-link">LOGIN</a>
+          <a href="/about" class="nav-link">ABOUT US</a>
+      {% else %}
+          <a href="/homepage" class="nav-link">HOME</a>
+          <a href="/order" class="nav-link">ORDER</a>
+          <a href="/about" class="nav-link">ABOUT US</a>
+          <button class="toggle-btn" id="toggle-btn">☰ </button>
+      {% endif %}
+    </div>
+  </header>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <button class="close-sidebar" id="close-btn">✖</button>
+  <div class="profile">
+      <img src="/static/image/account.png" alt="Profile Avatar">
+      <span class="phone-number" id="phone-number">{{ full_name }}</span>
+  </div>
+  <div class="menu">
+      <!-- Personal Information -->
+      <a href="/personal_info" class="menu-link">
+          <img src="/static/image/personal_info.png" alt="Personal Info Icon" class="menu-icon">
+          Personal Information
+      </a>
+
+      <!-- Loan History -->
+      <a href="/loan_history" class="menu-link">
+          <img src="/static/image/history.png" alt="Loan History Icon" class="menu-icon">
+          Loan History
+      </a>
+
+      <!-- Privacy Policy -->
+      <a href="/privacy_policy" class="menu-link">
+          <img src="/static/image/policy.png" alt="Privacy Policy Icon" class="menu-icon">
+          Privacy Policy
+      </a>
+  </div>
+  <div class="logout">
+    <form action="/logout" method="POST" style="display: inline;">
+        <button type="submit" class="menu-link">
+            <img src="../static/image/logout.png" alt="Logout Icon" class="menu-icon">
+            Log Out
+        </button>
+    </form>
+</div>
+</div>
+
+<script>
+      // Sidebar toggle functionality
+      const toggleBtn = document.getElementById('toggle-btn');
+      const sidebar = document.getElementById('sidebar');
+      const closeBtn = document.getElementById('close-btn');
+
+      // Open/Close Sidebar
+      toggleBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('active'); // Toggle active class
+          toggleBtn.textContent = sidebar.classList.contains('active') ? "✖" : "☰"; // Toggle button text
+      });
+
+      // Close Sidebar
+      closeBtn.addEventListener('click', () => {
+          sidebar.classList.remove('active');
+          toggleBtn.textContent = "☰";
+      });
+
+      // Display phone number dynamically
+      const urlParams = new URLSearchParams(window.location.search);
+      const phone = urlParams.get('phone');
+
+      if (phone) {
+          document.getElementById('phone-number').textContent = `Phone Number: ${phone}`;
+      }
+</script>
+
+  <main>
+    <div class="info-container">
+      <div class="info-header">
+        <h1>Personal Information</h1>
+      </div>
+      <div class="info-content">
+        {% if personal_info %}
+            <div class="info-row">
+                <span class="label">Full Name</span>
+                <span class="value">{{ personal_info.full_name }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Date of Birth</span>
+                <span class="value">{{ personal_info.date_of_birth }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Gender</span>
+                <span class="value">{{ personal_info.gender }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Marital Status</span>
+                <span class="value">{{ personal_info.marital_status }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Phone Number</span>
+                <span class="value">{{ personal_info.phone_number }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Email Address</span>
+                <span class="value">{{ personal_info.email }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Employment Information</span>
+                <span class="value">{{ personal_info.employment_info }}</span>
+            </div>
+        {% else %}
+            <p>No personal information found. Please complete your profile.</p>
+        {% endif %}
+    </div>
+    </div>
+  </main>
+
+
+<footer class="footer">
+  <div class="footer-content">
+      <p>SMART <span class="highlight">LOANS</span>, SIMPLE <span class="highlight">SOLUTIONS</span></p>
+      <p>&copy; 2024 Creddito. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,405 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and HTML Styling */
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    color: white;
+    background-color: white;
+}
+
+/* Navigation Bar */
+.nav-bar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: #1b1a3d;
+    padding: 12px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.logo {
+    height: 80px;
+    margin-right: auto;
+    margin-left: 50px;
+}
+
+.nav-bar a {
+    margin: 0 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav-bar a:hover {
+    text-decoration: underline;
+}
+
+/* Back Button */
+.back-button-container {
+    position: absolute;
+    top: 170px;
+    left: 40px;
+    z-index: 10;
+}
+
+.back-btn {
+    color: white;
+    font-size: 1.2rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.back-btn:hover {
+    color: #ea5f8c;
+}
+
+.back-btn::before {
+    content: '←';
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+/* Verify Section */
+.verify-section {
+    background-color: #1a1a4e;
+    color: white;
+    padding: 20px;
+    font-size: 2em;
+    margin-bottom: 30px;
+    margin-top: 100px;
+    text-align: center;
+  }
+  
+  .verify-section h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+  
+  .verify-section .check-icon {
+    color: #ff5da2;
+    font-size: 1.5rem;
+    margin-left: 10px;
+  }
+  
+  .verify-section p {
+    font-size: 1rem;
+    color: #d6d6d6;
+    margin-top: 0.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+/* Form Container */
+.form-container {
+    background-color: #1a1a4e;
+    color: white;
+    padding: 40px;
+    font-size: 1rem;
+    margin: 50px auto;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: auto; /* Align text and input fields to the left */
+    margin-top: 50px;
+}
+
+/* Form Fields */
+.identity-form {
+    width: 100%; /* Ensure form spans the container */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+.identity-form input,
+.identity-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px; /* Consistent spacing */
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Prevent content overflow */
+}
+
+.form-header {
+    text-align: center; 
+    margin-bottom: 20px; 
+    width: 100%; 
+}
+
+.form-header h1 {
+    font-size: 1.3rem;
+    color: #ff5da2;
+    margin-bottom: 30px; 
+}
+
+label {
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+}
+
+input[type="date"] {
+    background-color: #ffffff;
+}
+
+button.submit-btn {
+    background-color: #ea5f8c;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px; 
+    margin-top: 40px;
+    align-items: auto;
+    margin-left: 180px;
+    
+}
+.submit-btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: 0 auto; 
+    margin-top: 40px;
+    align-items: auto;
+}
+button.submit-btn:hover {
+    background-color: #ff80ab;
+}
+.footer {
+    background-color: #1b1a3d;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .footer p {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  
+  .footer p:first-child {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 2.2px;
+  }
+  
+  .highlight {
+    color: #ea5f8c;
+    font-weight: bold;
+  }
+  .logout-btn {
+    background-color: #ea5f8c;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-left: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #d14b6b;
+}
+.toggle-btn {
+    background-color: #1b1a3d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.toggle-btn:hover {
+    background-color: #1b1a3d;
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Initially hide the sidebar */
+    width: 300px; /* Adjusted width to match design */
+    height: 100%;
+    background-color: #1b1a3d;
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    transition: right 0.3s ease;
+    font-family: 'Arial', sans-serif; /* Font update for cleaner style */
+}
+
+/* Active sidebar */
+.sidebar.active {
+    right: 0; /* Show sidebar when active */
+}
+
+/* Profile section */
+.sidebar .profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.sidebar .profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.sidebar .profile .phone-number {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Menu buttons */
+.sidebar .menu {
+    margin-top: 35px;
+}
+
+.sidebar .menu button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align text and icons to the left */
+    gap: 10px; /* Add spacing between icon and text */
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    color: #1b1a3d;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+   font-weight: bold;
+}
+
+.sidebar .menu button i {
+    margin-right: 10px;
+}
+.sidebar .menu button:hover {
+    background-color: #7f7fed;
+}
+/* Logout button */
+.sidebar .logout {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+}
+
+.sidebar .logout:hover {
+    color: #ea5f8c;
+}
+
+.sidebar .logout i {
+    margin-right: 10px;
+}
+
+/* Close Sidebar Button */
+.close-sidebar {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.close-sidebar:hover {
+    color: #ea5f8c;
+}
+.menu button .menu-icon,
+.logout .menu-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain; /* Ensure icons maintain proportions */
+}
+.logout {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.logout:hover {
+    color: #ea5f8c;
+}
+/* Menu link styling */
+.menu-link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px; /* Spacing between the icon and text */
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    background-color: white;
+    border-radius: 10px;
+    color: #1b1a3d;
+    font-size: 16px;
+    font-weight: bold; /* Bold text */
+    text-decoration: none; /* Remove underline from links */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for menu links */
+.menu-link:hover {
+    background-color: #7f7fed;
+}
+
+/* Icon styling */
+.menu-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}

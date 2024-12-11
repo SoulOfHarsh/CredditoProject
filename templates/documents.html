@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload with Preview</title>
+    <link rel="stylesheet" href="/static/css/documents.css">
+</head>
+<body>
+<header>
+    <div class="nav-bar">
+        <img src="/static/image/whitelogo.png" alt="Logo" class="logo">
+        {% if not is_logged_in %}
+            <a href="/homepage" class="nav-link">HOME</a>
+            <a href="/apply" class="nav-link">APPLY</a>
+            <a href="/login" class="nav-link">LOGIN</a>
+            <a href="/about" class="nav-link">ABOUT US</a>
+        {% else %}
+            <a href="/homepage" class="nav-link">HOME</a>
+            <a href="/order" class="nav-link">ORDER</a>
+            <a href="/about" class="nav-link">ABOUT US</a>
+            <button class="toggle-btn" id="toggle-btn">☰ </button>
+        {% endif %}
+    </div>
+</header>
+
+<!-- Back Button below the header -->
+<div class="back-button-container">
+    <a href="/verification" class="back-btn">Back</a>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <button class="close-sidebar" id="close-btn">✖</button>
+    <div class="profile">
+        <img src="/static/image/account.png" alt="Profile Avatar">
+        <span class="phone-number" id="phone-number">{{ full_name }}</span>
+    </div>
+    <div class="menu">
+        <!-- Personal Information -->
+        <a href="/personal_info" class="menu-link">
+            <img src="/static/image/personal_info.png" alt="Personal Info Icon" class="menu-icon">
+            Personal Information
+        </a>
+
+        <!-- Loan History -->
+        <a href="/loan_history" class="menu-link">
+            <img src="/static/image/history.png" alt="Loan History Icon" class="menu-icon">
+            Loan History
+        </a>
+
+        <!-- Privacy Policy -->
+        <a href="/privacy_policy" class="menu-link">
+            <img src="/static/image/policy.png" alt="Privacy Policy Icon" class="menu-icon">
+            Privacy Policy
+        </a>
+    </div>
+    <div class="logout">
+        <form action="/logout" method="POST" style="display: inline;">
+            <button type="submit" class="menu-link">
+                <img src="../static/image/logout.png" alt="Logout Icon" class="menu-icon">
+                Log Out
+            </button>
+        </form>
+    </div>
+</div>
+   
+    <script>
+        // Sidebar toggle functionality
+        const toggleBtn = document.getElementById('toggle-btn');
+        const sidebar = document.getElementById('sidebar');
+        const closeBtn = document.getElementById('close-btn');
+
+        // Open/Close Sidebar
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('active'); // Toggle active class
+            toggleBtn.textContent = sidebar.classList.contains('active') ? "✖" : "☰"; // Toggle button text
+        });
+
+        // Close Sidebar
+        closeBtn.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            toggleBtn.textContent = "☰";
+        });
+
+        // Display phone number dynamically
+        const urlParams = new URLSearchParams(window.location.search);
+        const phone = urlParams.get('phone');
+
+        if (phone) {
+            document.getElementById('phone-number').textContent = `Phone Number: ${phone}`;
+        }
+
+    </script>
+    
+<!-- Upload Section -->
+<div class="upload-section">
+    <form method="POST" enctype="multipart/form-data">
+        <h1>Upload your images</h1>
+        <p>Accepted formats: JPG, PNG.</p>
+    
+        <div class="upload-container">
+            <div class="upload-box">
+                <img src="/static/image/upload.png" alt="Upload Icon" class="upload-icon">
+                <p>Browse to choose a file</p>
+                <input type="file" name="file" id="file-input" class="file-input" accept=".jpg, .png" required>
+            </div>
+    
+            <div class="preview-container" id="preview-container" style="display: none;">
+                <img id="preview-image" alt="Preview" style="max-width: 100px; max-height: 100px;">
+                <button class="remove-file" id="remove-file">×</button>
+            </div>
+        </div>
+    
+        <button type="submit" class="upload-btn">Upload Documents</button>
+    </form>
+</div>
+
+<script>
+    // Select necessary DOM elements
+    const fileInput = document.getElementById('file-input');
+    const previewContainer = document.getElementById('preview-container');
+    const previewImage = document.getElementById('preview-image');
+    const removeFileButton = document.getElementById('remove-file');
+
+    // Handle file input change
+    fileInput.addEventListener('change', function () {
+        const file = this.files[0]; // Get the first selected file
+
+        if (file) {
+            const reader = new FileReader();
+
+            // Load the file and display it in the preview container
+            reader.onload = function () {
+                previewImage.src = reader.result;
+                previewContainer.style.display = 'flex'; // Show the preview container
+            };
+
+            reader.readAsDataURL(file); // Convert file to data URL
+        } else {
+            previewContainer.style.display = 'none'; // If no file, hide preview
+        }   
+    });
+
+    // Handle remove button click
+    removeFileButton.addEventListener('click', function () {
+        // Clear the preview image and the file input value
+        previewImage.src = ''; // Clear the preview image
+        previewContainer.style.display = 'none'; // Hide the preview container
+        fileInput.value = ''; // Clear the input file value
+    });
+</script>
+
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-content">
+        <p>SMART <span class="highlight">LOANS</span>, SIMPLE <span class="highlight">SOLUTIONS</span></p>
+        <p>&copy; 2024 Creddito. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>

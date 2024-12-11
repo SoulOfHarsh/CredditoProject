@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Your Identity</title>
+  <link rel="stylesheet" href="/static/css/verification.css">
+</head>
+<body>
+  <header>
+    <div class="nav-bar">
+        <img src="/static/image/whitelogo.png" alt="Logo" class="logo">
+        {% if not is_logged_in %}
+            <a href="/homepage" class="nav-link">HOME</a>
+            <a href="/apply" class="nav-link">APPLY</a>
+            <a href="/login" class="nav-link">LOGIN</a>
+            <a href="/about" class="nav-link">ABOUT US</a>
+        {% else %}
+            <a href="/homepage" class="nav-link">HOME</a>
+            <a href="/order" class="nav-link">ORDER</a>
+            <a href="/about" class="nav-link">ABOUT US</a>
+            <button class="toggle-btn" id="toggle-btn">☰ </button>
+        {% endif %}
+    </div>
+  </header>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <button class="close-sidebar" id="close-btn">✖</button>
+  <div class="profile">
+      <img src="/static/image/account.png" alt="Profile Avatar">
+      <span class="phone-number" id="phone-number">{{ full_name }}</span>
+  </div>
+  <div class="menu">
+      <!-- Personal Information -->
+      <a href="/personal_info" class="menu-link">
+          <img src="/static/image/personal_info.png" alt="Personal Info Icon" class="menu-icon">
+          Personal Information
+      </a>
+
+      <!-- Loan History -->
+      <a href="/loan_history" class="menu-link">
+          <img src="/static/image/history.png" alt="Loan History Icon" class="menu-icon">
+          Loan History
+      </a>
+
+      <!-- Privacy Policy -->
+      <a href="/privacy_policy" class="menu-link">
+          <img src="/static/image/policy.png" alt="Privacy Policy Icon" class="menu-icon">
+          Privacy Policy
+      </a>
+  </div>
+  <div class="logout">
+    <form action="/logout" method="POST" style="display: inline;">
+        <button type="submit" class="menu-link">
+            <img src="../static/image/logout.png" alt="Logout Icon" class="menu-icon">
+            Log Out
+        </button>
+    </form>
+</div>
+</div>
+ 
+  <script>
+      // Sidebar toggle functionality
+      const toggleBtn = document.getElementById('toggle-btn');
+      const sidebar = document.getElementById('sidebar');
+      const closeBtn = document.getElementById('close-btn');
+
+      // Open/Close Sidebar
+      toggleBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('active'); // Toggle active class
+          toggleBtn.textContent = sidebar.classList.contains('active') ? "✖" : "☰"; // Toggle button text
+      });
+
+      // Close Sidebar
+      closeBtn.addEventListener('click', () => {
+          sidebar.classList.remove('active');
+          toggleBtn.textContent = "☰";
+      });
+
+      // Display phone number dynamically
+      const urlParams = new URLSearchParams(window.location.search);
+      const phone = urlParams.get('phone');
+
+      if (phone) {
+          document.getElementById('phone-number').textContent = `Phone Number: ${phone}`;
+      }
+
+  </script>
+  
+  <div class="back-button-container">
+    <a href="/information" class="back-btn">Back</a>
+  </div>
+
+  <main>
+    <div class="verify-section">
+      <h1>Verify Your Identity <span class="check-icon">✔</span></h1>
+      <p>To proceed with your loan application, we need to verify your identity. Please upload a valid government-issued ID to help us confirm your identity securely.</p>
+    </div>
+    
+    <div class="id-section">
+      <h2>Accepted Valid IDs:</h2>
+      <p>We accept the following types of identification:</p>
+      <div class="id-buttons">
+        <!-- Button for National ID -->
+        <a href="/documents" class="id-button">
+          National ID &rarr;
+        </a>
+        <!-- Button for Passport -->
+        <a href="/documents" class="id-button">
+          Passport &rarr;
+        </a>
+      </div>
+      <div class="upload-instructions">
+        <h3>How to Upload Your ID:</h3>
+        <p>1. Choose Your ID Type: Select your valid ID from the list above.</p>
+        <p>2. Upload Your Document: Take a clear photo of your ID using your phone or upload an existing file from your gallery. Ensure the text is legible and the edges are visible.</p>
+        <p>3. Submit Your Document: Review your uploaded document, confirm your details, and click "Submit" to complete the upload process.</p>
+      </div>
+    </div>
+
+    <!-- Uploaded Files Section -->
+  <div class="uploaded-files-section">
+    <h2>Uploaded Files:</h2>
+    <div id="uploaded-files" class="uploaded-files">
+      <p>No files uploaded yet.</p>
+    </div>
+  </div>
+  </main>
+
+  
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>SMART <span class="highlight">LOANS</span>, SIMPLE <span class="highlight">SOLUTIONS</span></p>
+      <p>&copy; 2024 Creddito. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

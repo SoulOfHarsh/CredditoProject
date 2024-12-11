@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Management - Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/css/loan_management.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="/static/image/whitelogo.png" alt="Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/overview">Overview</a></li>
+                    <li><a href="/loan_management" class="active">Loan Approval</a></li> 
+                    <li><a href="/manage_loan">Loan Management</a></li> 
+                    <li><a href="/user_management">User Management</a></li>
+                </ul>
+            </nav>
+            <div class="logout">
+                <form action="{{ url_for('logout') }}" method="POST">
+                    <button type="submit">Log Out</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search..." class="search-input">
+                </div>
+            </header>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Loan Amount</th>
+                        <th>Loan Term</th>
+                        <th>Documents</th>
+                        <th>Information</th>
+                        <th>Application</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for loan in loans %}
+                    <tr>
+                        <td>{{ loan.full_name }}</td>
+                        <td>₱{{ loan.loan_amount }}</td>
+                        <td>{{ loan.loan_term }}</td>
+                        <td>
+                            <button class="view-doc-btn" data-doc="{{ loan.id_card_image_url }}">View Document</button>
+                        <td>
+                            <button class="view-info-btn" data-info="{{ loan.user_id }}">View Information</button>
+                            <td>
+                            <button class="approve-btn" data-loan-id="{{ loan.loan_id }}">Approve</button>
+                            <button class="reject-btn" data-loan-id="{{ loan.loan_id }}">Reject</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal for Viewing Document -->
+    <div id="doc-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">&times;</span>
+            <h3>Uploaded Document</h3>
+            <img id="uploaded-doc" src="" alt="Uploaded Document" />
+        </div>
+    </div>
+
+    <!-- Modal for Viewing Personal Information -->
+<div id="info-modal" class="modal">
+    <div class="modal-content">
+        <span id="close-info-modal" class="close">&times;</span>
+        <h3>User Personal Information</h3>
+        <div id="user-info">
+            <!-- User information will be displayed here -->
+        </div>
+    </div>
+</div>
+
+    <script>
+        // Modal and Document Viewing Functionality
+        const modal = document.getElementById("doc-modal");
+        const uploadedDoc = document.getElementById("uploaded-doc");
+        const closeModal = document.getElementById("close-modal");
+
+        // Open modal and show document
+        document.querySelectorAll(".view-doc-btn").forEach(button => {
+            button.addEventListener("click", () => {
+                const docPath = button.dataset.doc;
+                uploadedDoc.src = docPath; // Set the document source
+                modal.style.display = "flex";
+            });
+        });
+
+        // Close modal
+        closeModal.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        // Close modal when clicking outside content
+        window.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+        // Handle Approve and Reject actions
+        document.querySelectorAll(".approve-btn").forEach(button => {
+            button.addEventListener("click", () => {
+                const loanId = button.dataset.loanId;
+                fetch(`/update_loan_status/${loanId}/approve`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }).then(response => response.json())
+                  .then(data => {
+                      if (data.success) {
+                          location.reload();  // Reload the page to show updated loan status
+                      }
+                  });
+            });
+        });
+
+        document.querySelectorAll(".reject-btn").forEach(button => {
+            button.addEventListener("click", () => {
+                const loanId = button.dataset.loanId;
+                fetch(`/update_loan_status/${loanId}/reject`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }).then(response => response.json())
+                  .then(data => {
+                      if (data.success) {
+                          location.reload();  // Reload the page to show updated loan status
+                      }
+                  });
+            });
+        });
+        // Modal for Viewing Personal Information
+    const infoModal = document.getElementById("info-modal");
+    const closeInfoModal = document.getElementById("close-info-modal");
+    const userInfoContainer = document.getElementById("user-info");
+
+    // Open modal and show personal information
+    document.querySelectorAll(".view-info-btn").forEach(button => {
+        button.addEventListener("click", async () => {
+            const userId = button.dataset.info;
+            
+            // Fetch the user's personal info using the user_id
+            const response = await fetch(`/get_user_info/${userId}`);
+            const userInfo = await response.json();
+
+            if (userInfo) {
+                // Display the user's personal info
+                userInfoContainer.innerHTML = `
+                    <p><strong>Full Name:</strong> ${userInfo.full_name}</p>
+                    <p><strong>Date of Birth:</strong> ${userInfo.date_of_birth}</p>
+                    <p><strong>Gender:</strong> ${userInfo.gender}</p>
+                    <p><strong>Marital Status:</strong> ${userInfo.marital_status}</p>
+                    <p><strong>Phone Number:</strong> ${userInfo.phone_number}</p>
+                    <p><strong>Email:</strong> ${userInfo.email}</p>
+                    <p><strong>Employment Info:</strong> ${userInfo.employment_info}</p>
+                `;
+            }
+
+            infoModal.style.display = "flex"; // Open the information modal
+        });
+    });
+
+    // Close information modal
+    closeInfoModal.addEventListener("click", () => {
+        infoModal.style.display = "none";
+    });
+
+    // Close modal when clicking outside content
+    window.addEventListener("click", (e) => {
+        if (e.target === infoModal) {
+            infoModal.style.display = "none";
+        }
+    });
+    </script>
+</body>
+</html>

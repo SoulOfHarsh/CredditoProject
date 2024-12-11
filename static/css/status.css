@@ -1,0 +1,353 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f9f7f6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    margin-top: 50px;
+    max-height: 100px;
+}
+
+.nav-bar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: #1b1a3d;
+    padding: 12px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.logo {
+    height: 80px; 
+    margin-right: auto; 
+    margin-left: 50px;       
+}
+.nav-bar a { /* home, apply, order*/
+    margin: 0 20px;
+    color: white; /* Default color */
+    text-decoration: none;
+    font-size: 16px;
+    margin-left: 20px; 
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+.nav-bar a:hover {
+    text-decoration: underline;
+}
+.active {
+    color: pink; /* Color for the active link */
+}
+
+.align-left {
+    text-align: left;
+}
+
+.background {
+    text-align: left; 
+    margin: 0;       
+    padding-left: 0;      
+}
+
+.loan-section {
+    background-color: #1a1a4e;
+    color: white;
+    padding: 20px;
+    font-size: 2em;
+    margin-bottom: 30px;
+    margin-top: 50px;
+    text-align: center;
+    flex: 1;
+    width: 110%;
+}
+.loan-section h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0.5rem;
+    margin-left: auto;
+  margin-right: auto;
+  }
+.loan-status-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.loan-status-card {
+    background-color: #1a1a4e;
+    color: white;
+    width: 420px;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.loan-status-card .logo-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.loan-status-card img {
+    width: 120px;
+    height: 60px;
+    align-items: center;
+}
+
+.loan-status-card .loan-amount-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #fff;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.loan-amount {
+    font-size: 3em;
+    color: #ea5f8c;
+    font-weight: bold;
+}
+
+.label {
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.highlight {
+    color: #ea5f8c;
+}
+.footer {
+background-color: #1b1a3d; /* Dark background color */
+color: white; /* Text color */
+padding: 20px 0; /* Padding for spacing */
+text-align: center; /* Center-align text */
+width: 110%;
+margin-top: 50px;
+}
+
+.footer-content {
+max-width: 1200px; /* Limit width for large screens */
+margin: 0 auto; /* Center the content */
+padding: 0 20px;
+margin-top: 10px;
+}
+
+.footer p {
+font-size: 16px; /* Base text size */
+margin: 5px 0;
+margin-bottom: 5px;
+}
+
+.footer p:first-child {
+font-size: 25px; /* Larger font for the main slogan */
+font-weight: bold; /* Bold for emphasis */
+margin-bottom: 20px;
+letter-spacing: 2.2px;
+}
+
+.highlight {
+color: #ea5f8c; /* Highlight color for LOANS and SOLUTIONS */
+font-weight: bold;
+}
+
+.back-button-container {
+    position: absolute;
+  top: 175px;
+  left: 40px;
+  z-index: 10;
+}
+
+.back-btn {
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.back-btn:hover {
+    color: #ea5f8c;
+}
+
+.back-btn::before {
+    content: '←'; 
+    font-size: 20px;
+    margin-right: 8px;
+}
+.toggle-btn {
+    background-color: #1b1a3d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.toggle-btn:hover {
+    background-color: #1b1a3d;
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Initially hide the sidebar */
+    width: 300px; /* Adjusted width to match design */
+    height: 100%;
+    background-color: #1b1a3d;
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    transition: right 0.3s ease;
+    font-family: 'Arial', sans-serif; /* Font update for cleaner style */
+}
+
+/* Active sidebar */
+.sidebar.active {
+    right: 0; /* Show sidebar when active */
+}
+
+/* Profile section */
+.sidebar .profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.sidebar .profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.sidebar .profile .phone-number {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Menu buttons */
+.sidebar .menu {
+    margin-top: 35px;
+}
+
+.sidebar .menu button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align text and icons to the left */
+    gap: 10px; /* Add spacing between icon and text */
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    color: #1b1a3d;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+   font-weight: bold;
+}
+
+.sidebar .menu button i {
+    margin-right: 10px;
+}
+.sidebar .menu button:hover {
+    background-color: #7f7fed;
+}
+/* Logout button */
+.sidebar .logout {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+}
+
+.sidebar .logout:hover {
+    color: #ea5f8c;
+}
+
+.sidebar .logout i {
+    margin-right: 10px;
+}
+
+/* Close Sidebar Button */
+.close-sidebar {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.close-sidebar:hover {
+    color: #ea5f8c;
+}
+.menu button .menu-icon,
+.logout .menu-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain; /* Ensure icons maintain proportions */
+}
+.logout {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.logout:hover {
+    color: #ea5f8c;
+}
+/* Menu link styling */
+.menu-link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px; /* Spacing between the icon and text */
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    background-color: white;
+    border-radius: 10px;
+    color: #1b1a3d;
+    font-size: 16px;
+    font-weight: bold; /* Bold text */
+    text-decoration: none; /* Remove underline from links */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for menu links */
+.menu-link:hover {
+    background-color: #7f7fed;
+}
+
+/* Icon styling */
+.menu-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}

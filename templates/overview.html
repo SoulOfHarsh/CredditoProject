@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview - Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/css/overview.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Sidebar (same as the first HTML file) -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="/static/image/whitelogo.png" alt="Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/overview">Overview</a></li>
+                    <li><a href="/loan_management">Loan Approval</a></li> 
+                    <li><a href="/manage_loan">Loan Management</a></li> 
+                    <li><a href="/user_management">User Management</a></li>
+                </ul>
+            </nav>
+            <div class="logout">
+                <form action="{{ url_for('logout') }}" method="POST">
+                    <button type="submit">Log Out</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="dashboard-header">
+                <h1>Overview</h1>
+            </div>
+
+            <div class="overview-cards">
+                <div class="card">
+                    <h2>Total Loans</h2>
+                    <p>{{ total_loans }}</p>
+                </div>
+                <div class="card">
+                    <h2>Total Loan Amount</h2>
+                    <p>₱{{ total_loan_amount | round(2) }}</p>
+                </div>
+                <div class="card">
+                    <h2>Total Repaid Amount</h2>
+                    <p>₱{{ total_repaid_amount | round(2) }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get all sidebar links
+        const sidebarLinks = document.querySelectorAll('.sidebar nav ul li a');
+        
+        // Add click event listener to each link
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                // Remove 'active' class from all links
+                sidebarLinks.forEach(link => link.classList.remove('active'));
+        
+                // Add 'active' class to the clicked link
+                this.classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>

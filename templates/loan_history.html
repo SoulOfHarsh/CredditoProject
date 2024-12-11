@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan History</title>
+  <link rel="stylesheet" href="/static/css/loan_history.css">
+</head>
+<body>
+  <header>
+    <div class="nav-bar">
+        <img src="/static/image/whitelogo.png" alt="Logo" class="logo">
+        {% if not is_logged_in %}
+          <a href="/homepage" class="nav-link">HOME</a>
+          <a href="/apply" class="nav-link">APPLY</a>
+          <a href="/login" class="nav-link">LOGIN</a>
+          <a href="/about" class="nav-link">ABOUT US</a>
+        {% else %}
+          <a href="/homepage" class="nav-link">HOME</a>
+          <a href="/order" class="nav-link">ORDER</a>
+          <a href="/about" class="nav-link">ABOUT US</a>
+          <button class="toggle-btn" id="toggle-btn">☰ </button>
+        {% endif %}
+    </div>
+  </header>
+  <body>
+    <div class="loan-history-container">
+        <header class="header">
+            <h1>Loan History</h1>
+        </header>
+
+        {% if loans %}
+        <div class="loan-details">
+            {% for loan in loans %}
+            <div class="details-row">
+                <span class="label">Loan Type</span>
+                <span class="value">{{ loan.loan_type }}</span>
+            </div>
+            <div class="details-row">
+                <span class="label">Loan Amount</span>
+                <span class="value">₱{{ loan.loan_amount }}</span>
+            </div>
+            <div class="details-row">
+                <span class="label">Interest Rate</span>
+                <span class="value">{{ loan.interest_rate }}%</span>
+            </div>
+            <div class="details-row">
+                <span class="label">Loan Term</span>
+                <span class="value">{{ loan.loan_term }}</span>
+            </div>
+            <hr class="divider">
+            <div class="details-row">
+                <span class="label">Application Date</span>
+                <span class="value">{{ loan.borrow_date }}</span>
+            </div>
+            <div class="details-row">
+                <span class="label">Repayment Date</span>
+                <span class="value">{{ loan.repayment_date }}</span>
+            </div>
+
+            {% if loan.is_paid %}
+            <div class="details-row">
+                <span class="label">Payment Date</span>
+                <span class="value">{{ loan.payment_date }}</span>
+            </div>
+            {% else %}
+            <div class="details-row">
+                <span class="label">Payment Status</span>
+                <span class="value">{{ loan.status }}</span>
+            </div>
+            {% endif %}
+            <hr class="divider">
+            {% endfor %}
+        </div>
+
+        <div class="info-message">
+            <p>You can process your repayment through our GCash account:</p>
+            <p><strong>Account Name:</strong> Sydney Coleen</p>
+            <p><strong>GCash Number:</strong> 0962-248-4265</p>
+        </div>
+        {% else %}
+        <p>No loan history available.</p>
+        {% endif %}
+    </div>
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <button class="close-sidebar" id="close-btn">✖</button>
+  <div class="profile">
+      <img src="/static/image/account.png" alt="Profile Avatar">
+      <span class="phone-number" id="phone-number">{{ full_name }}</span>
+  </div>
+  <div class="menu">
+      <!-- Personal Information -->
+      <a href="/personal_info" class="menu-link">
+          <img src="/static/image/personal_info.png" alt="Personal Info Icon" class="menu-icon">
+          Personal Information
+      </a>
+
+      <!-- Loan History -->
+      <a href="/loan_history" class="menu-link">
+          <img src="/static/image/history.png" alt="Loan History Icon" class="menu-icon">
+          Loan History
+      </a>
+
+      <!-- Privacy Policy -->
+      <a href="/privacy_policy" class="menu-link">
+          <img src="/static/image/policy.png" alt="Privacy Policy Icon" class="menu-icon">
+          Privacy Policy
+      </a>
+  </div>
+  <div class="logout">
+    <form action="/logout" method="POST" style="display: inline;">
+        <button type="submit" class="menu-link">
+            <img src="../static/image/logout.png" alt="Logout Icon" class="menu-icon">
+            Log Out
+        </button>
+    </form>
+</div>
+</div>
+ 
+  <script>
+      // Sidebar toggle functionality
+      const toggleBtn = document.getElementById('toggle-btn');
+      const sidebar = document.getElementById('sidebar');
+      const closeBtn = document.getElementById('close-btn');
+
+      // Open/Close Sidebar
+      toggleBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('active'); // Toggle active class
+          toggleBtn.textContent = sidebar.classList.contains('active') ? "✖" : "☰"; // Toggle button text
+      });
+
+      // Close Sidebar
+      closeBtn.addEventListener('click', () => {
+          sidebar.classList.remove('active');
+          toggleBtn.textContent = "☰";
+      });
+
+      // Display phone number dynamically
+      const urlParams = new URLSearchParams(window.location.search);
+      const phone = urlParams.get('phone');
+
+      if (phone) {
+          document.getElementById('phone-number').textContent = `Phone Number: ${phone}`;
+      }
+
+  </script>
+  
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>SMART <span class="highlight">LOANS</span>, SIMPLE <span class="highlight">SOLUTIONS</span></p>
+      <p>&copy; 2024 Creddito. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

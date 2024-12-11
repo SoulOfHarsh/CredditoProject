@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/order.css">
+    <title>Loan Order</title>
+</head>
+<body>
+    <div class="nav-bar">
+        <img src="/static/image/whitelogo.png" alt="Logo" class="logo">
+            <a href="/homepage" class="nav-link">HOME</a>
+            <a href="/order" class="nav-link">ORDER</a>
+            <a href="/about" class="nav-link">ABOUT US</a>
+            <button class="toggle-btn" id="toggle-btn">☰ </button>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <button class="close-sidebar" id="close-btn">✖</button>
+        <div class="profile">
+            <img src="/static/image/account.png" alt="Profile Avatar">
+            <span class="phone-number" id="phone-number">{{ full_name }}</span>
+        </div>
+        <div class="menu">
+            <a href="/personal_info" class="menu-link">
+                <img src="/static/image/personal_info.png" alt="Personal Info Icon" class="menu-icon">
+                Personal Information
+            </a>
+            <a href="/loan_history" class="menu-link">
+                <img src="/static/image/history.png" alt="Loan History Icon" class="menu-icon">
+                Loan History
+            </a>
+            <a href="/privacy_policy" class="menu-link">
+                <img src="/static/image/policy.png" alt="Privacy Policy Icon" class="menu-icon">
+                Privacy Policy
+            </a>
+        </div>
+        {% if is_logged_in %}
+        <div class="logout">
+            <form action="/logout" method="POST" style="display: inline;">
+                <button type="submit" class="menu-link">
+                    <img src="../static/image/logout.png" alt="Logout Icon" class="menu-icon">
+                    Log Out
+                </button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        // Sidebar toggle functionality
+        const toggleBtn = document.getElementById('toggle-btn');
+        const sidebar = document.getElementById('sidebar');
+        const closeBtn = document.getElementById('close-btn');
+
+        // Open/Close Sidebar
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('active'); // Toggle active class
+            toggleBtn.textContent = sidebar.classList.contains('active') ? "✖" : "☰"; // Toggle button text
+        });
+
+        // Close Sidebar
+        closeBtn.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            toggleBtn.textContent = "☰";
+        });
+
+        // Display phone number dynamically
+        const urlParams = new URLSearchParams(window.location.search);
+        const phone = urlParams.get('phone');
+
+        if (phone) {
+            document.getElementById('phone-number').textContent = `Phone Number: ${phone}`;
+        }
+    </script>
+
+    <div class="container">
+        <h1>Loan Application</h1>
+        <div class="form-container">
+            <form action="/order" method="POST">
+                <label for="loan-amount">Loan Amount *</label>
+                <input type="number" id="loan-amount" name="loan-amount" placeholder="Enter amount" required>
+            
+                <label for="loan-type">Loan Type *</label>
+                <select id="loan-type" name="loan-type" required>
+                    <option value="" disabled selected>Select loan type</option>
+                    <option value="Personal Loan">Personal Loan</option>
+                    <option value="Business Loan">Business Loan</option>
+                    <option value="Student Loan">Student Loan</option>
+                </select>
+            
+                <label for="loan-term">Loan Term *</label>
+                <select id="loan-term" name="loan-term" required>
+                    <option value="" disabled selected>Select loan term</option>
+                    <option value="1_week">1 Week</option>
+                    <option value="1_month">1 Month</option>
+                    <option value="3_months">3 Months</option>
+                    <option value="6_months">6 Months</option>
+                    <option value="12_months">12 Months</option>
+                    <option value="24_months">24 Months</option>
+                </select>
+            
+                <label for="interest-rate">Interest rate</label>
+                <input type="text" id="interest-rate" value="20%" readonly>
+            
+                <button type="submit">Submit</button>
+                <p class="info-message">
+                    Your approved loan amount will be transferred directly to your GCash account using the phone number you provided during the application process. Please ensure your GCash account is active and linked to the correct number to avoid any delays.
+                </p>
+            </form>
+        </div>
+    </div>
+    
+    <div class="back-button-container">
+        <a href="/homepage" class="back-btn">Back</a>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>SMART <span class="highlight">LOANS</span>, SIMPLE <span class="highlight">SOLUTIONS</span></p>
+            <p>&copy; 2024 Creddito. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

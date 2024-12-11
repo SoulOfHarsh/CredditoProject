@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Management - Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/css/manage_loan.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="/static/image/whitelogo.png" alt="Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/overview">Overview</a></li>
+                    <li><a href="/loan_management" class="active">Loan Approval</a></li> 
+                    <li><a href="/manage_loan">Loan Management</a></li> 
+                    <li><a href="/user_management">User Management</a></li>
+                </ul>
+            </nav>
+            <div class="logout">
+                <form action="{{ url_for('logout') }}" method="POST">
+                    <button type="submit">Log Out</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search..." class="search-input">
+                </div>
+            </header>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Loan Amount</th>
+                        <th>Loan Term</th>
+                        <th>Repayment</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for loan in loans %}
+                    <tr>
+                    <td>{{ loan.full_name }}</td>
+                    <td>₱{{ loan.loan_amount }}</td>
+                    <td>{{ loan.loan_term }}</td>
+                    <td>₱{{ loan.repayment }}</td>
+                    <td>
+                        <button class="paid-btn" data-loan-id="{{ loan.loan_id }}">Paid</button>
+                    </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll(".paid-btn").forEach(button => {
+            button.addEventListener("click", () => {
+                const loanId = button.dataset.loanId;
+        
+                fetch(`/mark_as_paid/${loanId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Loan marked as Paid!");
+                        location.reload();  // Refresh the page
+                    } else {
+                        alert("Error: Could not update loan status.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Fetch Error:", error);
+                    alert("Request failed. Please try again.");
+                });
+            });
+        });
+             
+    </script>
+</body>
+</html>

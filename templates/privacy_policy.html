@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy</title>
+  <link rel="stylesheet" href="/static/css/privacy_policy.css">
+</head>
+<body>
+  <header>
+    <div class="nav-bar">
+        <img src="/static/image/whitelogo.png" alt="Logo" class="logo">
+        {% if not is_logged_in %}
+          <a href="/homepage" class="nav-link">HOME</a>
+          <a href="/apply" class="nav-link">APPLY</a>
+          <a href="/login" class="nav-link">LOGIN</a>
+          <a href="/about" class="nav-link">ABOUT US</a>
+        {% else %}
+          <a href="/homepage" class="nav-link">HOME</a>
+          <a href="/order" class="nav-link">ORDER</a>
+          <a href="/about" class="nav-link">ABOUT US</a>
+          <button class="toggle-btn" id="toggle-btn">☰ </button>
+        {% endif %}
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <button class="close-sidebar" id="close-btn">✖</button>
+  <div class="profile">
+      <img src="/static/image/account.png" alt="Profile Avatar">
+      <span class="phone-number" id="phone-number">{{ full_name }}</span>
+  </div>
+  <div class="menu">
+      <!-- Personal Information -->
+      <a href="/personal_info" class="menu-link">
+          <img src="/static/image/personal_info.png" alt="Personal Info Icon" class="menu-icon">
+          Personal Information
+      </a>
+
+      <!-- Loan History -->
+      <a href="/loan_history" class="menu-link">
+          <img src="/static/image/history.png" alt="Loan History Icon" class="menu-icon">
+          Loan History
+      </a>
+
+      <!-- Privacy Policy -->
+      <a href="/privacy_policy" class="menu-link">
+          <img src="/static/image/policy.png" alt="Privacy Policy Icon" class="menu-icon">
+          Privacy Policy
+      </a>
+  </div>
+  <div class="logout">
+    <form action="/logout" method="POST" style="display: inline;">
+        <button type="submit" class="menu-link">
+            <img src="../static/image/logout.png" alt="Logout Icon" class="menu-icon">
+            Log Out
+        </button>
+    </form>
+</div>
+</div>
+ 
+  <script>
+      // Sidebar toggle functionality
+      const toggleBtn = document.getElementById('toggle-btn');
+      const sidebar = document.getElementById('sidebar');
+      const closeBtn = document.getElementById('close-btn');
+
+      // Open/Close Sidebar
+      toggleBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('active'); // Toggle active class
+          toggleBtn.textContent = sidebar.classList.contains('active') ? "✖" : "☰"; // Toggle button text
+      });
+
+      // Close Sidebar
+      closeBtn.addEventListener('click', () => {
+          sidebar.classList.remove('active');
+          toggleBtn.textContent = "☰";
+      });
+
+      // Display phone number dynamically
+      const urlParams = new URLSearchParams(window.location.search);
+      const phone = urlParams.get('phone');
+
+      if (phone) {
+          document.getElementById('phone-number').textContent = `Phone Number: ${phone}`;
+      }
+
+  </script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Retrieve loan details from localStorage
+        const loanDetails = JSON.parse(localStorage.getItem("loanDetails"));
+
+        if (loanDetails) {
+            // Update the loan history display with retrieved data
+            document.getElementById("loan-type").textContent = loanDetails.loanType;
+            document.getElementById("loan-amount").textContent = `₱${loanDetails.loanAmount}`;
+            document.getElementById("interest-rate").textContent = loanDetails.interestRate;
+            document.getElementById("loan-term").textContent = loanDetails.loanTerm;
+            document.getElementById("application-date").textContent = loanDetails.borrowDate;
+            document.getElementById("repayment-date").textContent = loanDetails.repaymentDate;
+        } else {
+            // Display a message if no loan history is found
+            document.querySelector(".loan-details").innerHTML = "<p>No loan history available.</p>";
+        }
+    });
+</script>
+
+<div class="container">
+    <div class="card">
+      <div class="card-header">
+        <img src="/static/image/logocre.png" alt="Creddito Logo">
+        <h1>Creddito</h1>
+      </div>
+      <div class="card-body">
+        <p>At Creddito, we are dedicated to providing a transparent, secure, and user-friendly platform for managing loans. 
+            Our mission is to make borrowing and investing accessible to everyone by fostering trust and clarity in every interaction. 
+            We ensure that all loan terms, interest rates, and fees are clearly communicated upfront, empowering borrowers and investors with a comprehensive understanding of their rights and responsibilities. 
+            Protecting your personal and financial data is our top priority, which is why we employ advanced encryption technologies and adhere to strict privacy standards to keep your information secure.</p>
+        <p>Our platform is designed with flexibility in mind, offering borrowers the ability to choose repayment schedules that align with their financial circumstances. 
+            We encourage early repayments, providing borrowers with the option to pay off loans ahead of schedule without additional penalties. At Creddito, we also value the relationships we build with our users. 
+            Our dedicated support team is always available to assist with any questions or concerns, ensuring that every user has a seamless and stress-free experience.</p>
+        <p>Whether you’re looking for a loan to achieve personal goals, grow your business, or support others as an investor, Creddito is here to make the process simple, transparent, and rewarding. 
+            Together, we’re building a financial ecosystem where opportunities flourish, and dreams become reality.</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>SMART <span class="highlight">LOANS</span>, SIMPLE <span class="highlight">SOLUTIONS</span></p>
+      <p>&copy; 2024 Creddito. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

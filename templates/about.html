@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="/static/css/about.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <img src="/static/image/whitelogo.png" alt="Logo" class="logo">
+        {% if not is_logged_in %}
+            <a href="/homepage" class="nav-link">HOME</a>
+            <a href="/apply" class="nav-link">APPLY</a>
+            <a href="/login" class="nav-link">LOGIN</a>
+        {% else %}
+            <a href="/homepage" class="nav-link">HOME</a>
+            <a href="/order" class="nav-link">ORDER</a>
+            <button class="toggle-btn" id="toggle-btn">☰ </button>
+        {% endif %}
+
+    </div>
+
+    <!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <button class="close-sidebar" id="close-btn">✖</button>
+  <div class="profile">
+      <img src="/static/image/account.png" alt="Profile Avatar">
+      <span class="phone-number" id="phone-number">{{ full_name }}</span>
+  </div>
+  <div class="menu">
+      <!-- Personal Information -->
+      <a href="/personal_info" class="menu-link">
+          <img src="/static/image/personal_info.png" alt="Personal Info Icon" class="menu-icon">
+          Personal Information
+      </a>
+
+      <!-- Loan History -->
+      <a href="/loan_history" class="menu-link">
+          <img src="/static/image/history.png" alt="Loan History Icon" class="menu-icon">
+          Loan History
+      </a>
+
+      <!-- Privacy Policy -->
+      <a href="/privacy_policy" class="menu-link">
+          <img src="/static/image/policy.png" alt="Privacy Policy Icon" class="menu-icon">
+          Privacy Policy
+      </a>
+  </div>
+  <div class="logout">
+    <form action="/logout" method="POST" style="display: inline;">
+        <button type="submit" class="menu-link">
+            <img src="../static/image/logout.png" alt="Logout Icon" class="menu-icon">
+            Log Out
+        </button>
+    </form>
+</div>
+</div>
+ 
+  <script>
+      // Sidebar toggle functionality
+      const toggleBtn = document.getElementById('toggle-btn');
+      const sidebar = document.getElementById('sidebar');
+      const closeBtn = document.getElementById('close-btn');
+
+      // Open/Close Sidebar
+      toggleBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('active'); // Toggle active class
+          toggleBtn.textContent = sidebar.classList.contains('active') ? "✖" : "☰"; // Toggle button text
+      });
+
+      // Close Sidebar
+      closeBtn.addEventListener('click', () => {
+          sidebar.classList.remove('active');
+          toggleBtn.textContent = "☰";
+      });
+
+      // Display phone number dynamically
+      const urlParams = new URLSearchParams(window.location.search);
+      const phone = urlParams.get('phone');
+
+      if (phone) {
+          document.getElementById('phone-number').textContent = `Phone Number: ${phone}`;
+      }
+
+  </script>
+  
+    <!-- Main Content -->
+  <main>
+    <section class="about-section">
+      <div class="about-container">
+        <h1>About Creddito</h1>
+        <p>Creddito is a loan platform designed to make borrowing easy, transparent, and accessible. We connect you with a range of financial products tailored to your unique needs, all backed by a trusted community of investors. Whether you're seeking to fund a personal project, consolidate debt, or expand your business, Creddito is here to guide you every step of the way.</p>
+        <p>Our platform offers flexible loan options with competitive interest rates, personalized terms, and application processes. We believe in responsible lending, ensuring that you have the right tools to make informed decisions. With Creddito, you'll experience quick approvals, secure transactions, and ongoing support from our dedicated team.</p>
+      </div>
+    </section>
+
+    <section class="team-section">
+      <div class="team-container">
+        <h1>Our Team</h1>
+        <p>At Creddito, our team is united by the goal of making financial services simple, secure, and transparent. We work together to streamline the loan application process and deliver a seamless user experience. We’re dedicated to continuously improving our platform to meet your needs, ensuring trust, transparency, and customer satisfaction. Above all, we strive to empower individuals with the tools they need to achieve their financial goals.</p>
+      </div>
+    </section>
+  </main>
+
+  <section class="contact-section">
+    <div class="contact-container">
+      <h1>Contact Us</h1>
+      <p>Have questions or need help? We're here for you! Reach out to us anytime:</p>
+      <p>Email: support@creddito.com</p>
+      <p>Phone: 09776820598</p>
+    </div>
+  </section>
+</main>
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>SMART <span class="highlight">LOANS</span>, SIMPLE <span class="highlight">SOLUTIONS</span></p>
+            <p>&copy; 2024 Creddito. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Status</title>
+    <link rel="stylesheet" href="/static/css/status.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <img src="/static/image/whitelogo.png" alt="Logo" class="logo">
+        <a href="/homepage" class="nav-link">HOME</a>
+        <a href="/order" class="nav-link">ORDER</a>
+        <a href="/about" class="nav-link">ABOUT US</a>
+        <button class="toggle-btn" id="toggle-btn">☰ </button>
+    </div>
+
+    <!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <button class="close-sidebar" id="close-btn">✖</button>
+    <div class="profile">
+        <img src="/static/image/account.png" alt="Profile Avatar">
+        <span class="phone-number" id="phone-number">Phone Number</span>
+    </div>
+    <div class="menu">
+        <!-- Personal Information -->
+        <a href="/personal_info" class="menu-link">
+            <img src="/static/image/personal_info.png" alt="Personal Info Icon" class="menu-icon">
+            Personal Information
+        </a>
+
+        <!-- Loan History -->
+        <a href="/loan_history" class="menu-link">
+            <img src="/static/image/history.png" alt="Loan History Icon" class="menu-icon">
+            Loan History
+        </a>
+
+        <!-- Privacy Policy -->
+        <a href="/privacy_policy" class="menu-link">
+            <img src="/static/image/policy.png" alt="Privacy Policy Icon" class="menu-icon">
+            Privacy Policy
+        </a>
+    </div>
+    <div class="logout">
+        <form action="/logout" method="POST" style="display: inline;">
+            <button type="submit" class="menu-link">
+                <img src="../static/image/logout.png" alt="Logout Icon" class="menu-icon">
+                Log Out
+            </button>
+        </form>
+    </div>
+</div>
+   
+    <script>
+        // Sidebar toggle functionality
+        const toggleBtn = document.getElementById('toggle-btn');
+        const sidebar = document.getElementById('sidebar');
+        const closeBtn = document.getElementById('close-btn');
+
+        // Open/Close Sidebar
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('active'); // Toggle active class
+            toggleBtn.textContent = sidebar.classList.contains('active') ? "✖" : "☰"; // Toggle button text
+        });
+
+        // Close Sidebar
+        closeBtn.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            toggleBtn.textContent = "☰";
+        });
+
+        // Display phone number dynamically
+        const urlParams = new URLSearchParams(window.location.search);
+        const phone = urlParams.get('phone');
+
+        if (phone) {
+            document.getElementById('phone-number').textContent = `Phone Number: ${phone}`;
+        }
+
+    </script>
+    
+    <div class="loan-section">
+        <h1>Loan Status</h1>
+    </div>
+
+    <div class="back-button-container">
+        <a href="/order" class="back-btn">Back</a>
+    </div>
+
+    <div class="loan-status-container">
+        <div class="loan-status-card">
+            <div class="logo-section">
+                <img src="/static/image/whitelogo.png" alt="Creddito Logo">
+            </div>
+            <p class="label">Loan Amount</p>
+            <p class="loan-amount">₱{{ loan.loan_amount }}</p>
+            
+            <p class="label">Total with Interest (20%)</p>
+            <p class="loan-amount">₱{{ total_with_interest | round(2) }}</p> 
+    
+            <div class="loan-amount-section">
+                <p>Borrow Date</p>
+                <p>{{ loan.borrow_date }}</p> 
+            </div>
+    
+            <div class="loan-amount-section">
+                <p>Repayment Date</p>
+                <p>{{ loan.repayment_date }}</p> 
+            </div>
+        </div>
+    </div>
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>SMART <span class="highlight">LOANS</span>, SIMPLE <span class="highlight">SOLUTIONS</span></p>
+            <p>&copy; 2024 Creddito. All rights reserved.</p>
+        </div>
+    </footer>
+
+    
+</body>
+</html>
